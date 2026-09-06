@@ -133,6 +133,10 @@
   /* ---- Dashboard shell ---- */
   #dashboardRoot{ display:none; }
   #dashboardRoot.show{ display:block; }
+  #dashboardRoot.client-platform-host{ display:block !important; min-height:100vh; width:100%; }
+  #dashboardRoot.client-platform-host > :not(#embeddedClientPlatform){ display:none !important; }
+  #embeddedClientPlatform{ display:none; width:100%; height:100vh; min-height:720px; border:0; background:#eef1ec; }
+  #dashboardRoot.client-platform-host #embeddedClientPlatform{ display:block; }
   .top-bar{
     background:var(--ink); color:var(--paper); padding:14px 28px;
     display:flex; justify-content:space-between; align-items:center;
@@ -198,6 +202,8 @@
   .secure-mark{ display:flex; align-items:center; gap:7px; color:#47735d; }
   .secure-dot{ width:7px; height:7px; border-radius:50%; background:#5d9d76; box-shadow:0 0 0 4px #dceee2; }
   .nav-login{ border:0; background:transparent; color:#16261f; font:inherit; cursor:pointer; padding:8px 0; border-bottom:1px solid #9bb0a4; }
+  .landing-nav .nav-meta .nav-login{ font-size:15px; font-weight:600; padding:11px 16px; border:1px solid #9bb0a4; background:rgba(255,255,255,.34); }
+  .landing-nav .nav-meta .nav-login:hover{ border-color:#47735d; background:#eef6ef; }
   .landing-main{ max-width:1180px; margin:0 auto; padding:50px 40px 70px; }
   .eyebrow{ color:#5d8d6f; font-size:11px; letter-spacing:2px; text-transform:uppercase; font-weight:bold; margin-bottom:18px; }
   .hero-grid{ display:grid; grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr); gap:70px; align-items:end; }
@@ -269,6 +275,14 @@
   #dashboardRoot.client-mode .top-bar .name{ font-family:'Newsreader',Georgia,serif; font-size:24px; }
   #dashboardRoot.client-mode .top-bar .who{ color:#5b6b62; }
   #dashboardRoot.client-mode .top-bar button{ color:#182b21; border-color:rgba(24,43,33,.28); }
+  #dashboardRoot.client-mode .top-actions{ display:flex; align-items:center; gap:8px; }
+  #dashboardRoot.client-mode .top-action{ width:34px; height:34px; padding:0; display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(24,43,33,.18); border-radius:50%; background:transparent; color:#182b21; position:relative; }
+  #dashboardRoot.client-mode .top-action:hover{ background:#dce7de; border-color:#a6793d; }
+  #dashboardRoot.client-mode .top-action .badge{ position:absolute; top:-4px; right:-3px; min-width:15px; height:15px; padding:0 3px; border-radius:10px; background:#7a2e2e; color:#fff; font:10px 'IBM Plex Mono',monospace; display:flex; align-items:center; justify-content:center; }
+  #dashboardRoot.client-mode .dashboard-search{ width:240px; margin-left:auto; margin-right:10px; border:1px solid rgba(24,43,33,.2); background:#fff; padding:8px 11px; font:13px 'IBM Plex Sans',sans-serif; color:#182b21; }
+  #dashboardRoot.client-mode .client-toolbar{ grid-column:2; display:flex; flex-wrap:wrap; gap:4px; padding:8px 36px; background:#f8f9f6; border-bottom:1px solid rgba(24,43,33,.14); }
+  #dashboardRoot.client-mode .client-toolbar button{ border:0; background:transparent; color:#385443; padding:6px 10px; font-size:12px; cursor:pointer; }
+  #dashboardRoot.client-mode .client-toolbar button:hover{ background:#dce7de; }
   .client-sidebar{ display:none; grid-column:1; grid-row:1 / span 2; background:#182b21; color:#f8f9f6; padding:28px 10px 18px; flex-direction:column; }
   #dashboardRoot.client-mode .client-sidebar{ display:flex; }
   .client-sidebar-brand{ padding:0 12px 22px; border-bottom:1px solid rgba(255,255,255,.13); margin-bottom:14px; font-family:'Newsreader',Georgia,serif; font-size:20px; line-height:1.1; }
@@ -307,11 +321,37 @@
   #dashboardRoot.client-mode .claim-dot.done{ background:#4b6c53; }
   #dashboardRoot.client-mode .claim-dot.current{ background:#a6793d; box-shadow:0 0 0 4px rgba(166,121,61,.16); }
   #dashboardRoot.client-mode .request-status{ display:inline-block; background:#dce7de; color:#4b6c53; border-radius:20px; padding:3px 8px; font-size:11px; }
+  #dashboardRoot.client-mode .client-form{ max-width:720px; }
+  #dashboardRoot.client-mode .client-form input,#dashboardRoot.client-mode .client-form textarea,#dashboardRoot.client-mode .client-form select{ width:100%; padding:10px; border:1px solid #cbd8cf; border-radius:2px; font:14px inherit; color:#263b2e; background:#fff; }
+  #dashboardRoot.client-mode .client-form textarea{ min-height:82px; resize:vertical; }
+  #dashboardRoot.client-mode .client-form .field{ margin-bottom:14px; }
+  #dashboardRoot.client-mode .notice-list{ margin:0; padding:0; list-style:none; }
+  #dashboardRoot.client-mode .notice-list li{ padding:12px 0; border-bottom:1px solid rgba(24,43,33,.12); font-size:13px; }
+  #dashboardRoot.client-mode .notice-list li:last-child{ border-bottom:0; }
+  #dashboardRoot.client-mode .integration-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  #dashboardRoot.client-mode .integration-item{ border:1px solid rgba(24,43,33,.14); background:#fff; padding:14px; }
+  #dashboardRoot.client-mode .integration-item strong{ display:block; font:500 16px 'Newsreader',Georgia,serif; }
+  #dashboardRoot.client-mode .integration-item span{ display:block; color:#5b6b62; font-size:11px; margin-top:4px; }
+  #dashboardRoot .staff-workspace{ max-width:1180px; }
+  #dashboardRoot .staff-workspace .staff-toolbar{ display:flex; gap:8px; flex-wrap:wrap; margin:18px 0; }
+  #dashboardRoot .staff-workspace .staff-toolbar input{ flex:1; min-width:220px; padding:10px; border:1px solid #cbd8cf; font:14px inherit; }
+  #dashboardRoot .staff-workspace .staff-toolbar button{ padding:9px 13px; border:1px solid #b8c8bd; background:#fff; color:#385443; cursor:pointer; }
+  #dashboardRoot .staff-workspace .staff-toolbar button:hover{ border-color:#a6793d; }
+  #dashboardRoot .staff-client-list{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  #dashboardRoot .staff-client-card{ border:1px solid #dfe7e0; background:#fff; padding:16px; cursor:pointer; }
+  #dashboardRoot .staff-client-card:hover{ border-color:#a6793d; }
+  #dashboardRoot .staff-client-card strong{ display:block; color:#1b3528; font:500 18px Georgia,serif; }
+  #dashboardRoot .staff-client-card span{ display:block; color:#718078; font-size:12px; margin-top:4px; }
   @media (max-width:880px){
     #dashboardRoot.client-mode{ display:block; }
     .client-sidebar{ display:none; }
     #dashboardRoot.client-mode #customerDash{ padding:24px 18px 40px; }
     #dashboardRoot.client-mode .request-grid{ grid-template-columns:1fr; }
+    #dashboardRoot.client-mode .top-bar{ padding:16px 18px; }
+    #dashboardRoot.client-mode .top-bar .who{ display:none; }
+    #dashboardRoot.client-mode .dashboard-search{ width:100%; order:3; margin:8px 0 0; }
+    #dashboardRoot.client-mode .client-toolbar{ padding:8px 18px; }
+    #dashboardRoot.client-mode .integration-grid,#dashboardRoot .staff-client-list{ grid-template-columns:1fr; }
   }
   @media (max-width:720px){
     .onboarding-shell{ padding:24px 18px 40px; }
@@ -365,6 +405,7 @@
         <div class="field"><label for="clientEmail">Email address</label><input id="clientEmail" type="email" required placeholder="you@example.com" /></div>
         <div class="field"><label for="clientPhone">Mobile number</label><input id="clientPhone" type="tel" required placeholder=" e.g. 082 123 4567" /></div>
         <div class="field"><label for="clientCity">City or town</label><input id="clientCity" required placeholder="Where you live" /></div>
+        <div class="field"><label for="clientPassword">Create password</label><input id="clientPassword" type="password" minlength="8" required placeholder="At least 8 characters" /></div>
       </div></fieldset>
       <fieldset class="form-section"><legend>What are you interested in?</legend><p class="form-note">Select all the areas you would like to explore with Royal Square.</p><div class="service-options">
         <label class="service-option"><input type="checkbox" name="service" value="Financial planning" /> Financial planning</label>
@@ -400,11 +441,11 @@
 
     <div class="field">
       <label>Email</label>
-      <input type="email" placeholder="you@example.com" />
+      <input id="loginEmail" type="email" placeholder="you@example.com" required />
     </div>
     <div class="field">
       <label>Password</label>
-      <input type="password" placeholder="••••••••" />
+      <input id="loginPassword" type="password" placeholder="Your password" required />
     </div>
     <button class="btn primary" onclick="enterDashboard()">Continue</button>
     <div class="switch-line">
@@ -413,13 +454,38 @@
   </div>
 </div>
 
+<div class="overlay" id="securityOverlay">
+  <div class="modal security-modal">
+    <button class="close-x" onclick="skipSecurityCheck()">✕</button>
+    <h2>Security check</h2>
+    <p class="sub">For this prototype, you can allow camera access and location sharing to demonstrate a protected login.</p>
+    <video id="securityVideo" autoplay muted playsinline style="display:none;width:100%;max-height:240px;background:#10140f;object-fit:cover;"></video>
+    <p id="securityStatus" class="form-note">Camera and location are optional in this prototype.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn primary" onclick="startSecurityCheck()">Allow security check</button><button class="btn secondary" onclick="skipSecurityCheck()">Continue without it</button></div>
+  </div>
+</div>
+
 <div id="dashboardRoot">
+  <iframe id="embeddedClientPlatform" title="Royal Square Financial client platform"></iframe>
   <div class="top-bar">
     <div>
       <div class="name">Royal Square Financial</div>
       <div class="who" id="whoLine">Customer portal</div>
     </div>
-    <button onclick="exitDashboard()">Log out</button>
+    <div class="top-actions">
+      <input class="dashboard-search" id="dashboardSearch" type="search" placeholder="Search your account" oninput="searchDashboard(this.value)">
+      <button class="top-action" aria-label="Notifications" title="Notifications" onclick="showClientView('notifications')">♧<span class="badge">3</span></button>
+      <button class="top-action" aria-label="Help" title="Help" onclick="showClientView('help')">?</button>
+      <button class="top-action" aria-label="Settings" title="Settings" onclick="showClientView('settings')">⚙</button>
+      <button onclick="exitDashboard()">Log out</button>
+    </div>
+  </div>
+
+  <div class="client-toolbar">
+    <button onclick="showClientView('requests')">＋ New request</button>
+    <button onclick="window.print()">▣ Print</button>
+    <button onclick="exportClientSummary()">⇩ Export summary</button>
+    <button onclick="showClientView('help')">? Help centre</button>
   </div>
 
   <aside class="client-sidebar" id="clientSidebar">
@@ -430,6 +496,8 @@
       <button onclick="showClientView('reminders')">◷ &nbsp; My reminders</button>
       <button onclick="showClientView('claims')">◇ &nbsp; Claims</button>
       <button onclick="showClientView('requests')">□ &nbsp; Requests</button>
+      <button onclick="showClientView('personal')">◌ &nbsp; Personal details</button>
+      <button onclick="showClientView('integrations')">↔ &nbsp; Providers</button>
     </nav>
     <div class="sidebar-status">Secure client space<br>Last synced today</div>
   </aside>
@@ -496,6 +564,39 @@
         <button class="request-card" onclick="showClientView('adviser')"><strong>Request a consultation</strong><span>Book time with your adviser.</span></button><button class="request-card" onclick="showClientView('documents')"><strong>Request a policy document</strong><span>Get a copy of an active policy.</span></button><button class="request-card" onclick="showClientView('documents')"><strong>Submit client information</strong><span>Update your financial profile.</span></button><button class="request-card" onclick="showClientView('adviser')"><strong>Change of address</strong><span>Update your linked policies.</span></button><button class="request-card" onclick="showClientView('adviser')"><strong>Change of bank details</strong><span>Update premium collection details.</span></button><button class="request-card" onclick="showClientView('adviser')"><strong>Request an IRP5</strong><span>Request a tax certificate.</span></button>
       </div></div>
       <div class="client-data-panel"><h3>Recent requests</h3><div class="data-row"><span>Request an IRP5 <span class="data-muted">· Allan Gray</span></span><span class="request-status">Complete</span></div><div class="data-row"><span>Change of address</span><span class="request-status">Sent to provider</span></div></div>
+    </div>
+
+    <div id="cd-personal" class="cd-panel">
+      <a class="back-link" onclick="showClientView('home')">← Back</a><h2 class="dash-greet">Personal details</h2>
+      <p class="client-workspace-note">Keep your contact and household information current so renewals, claims and documents reach you without delay.</p>
+      <div class="client-data-panel client-form">
+        <form onsubmit="saveClientDetails(event)">
+          <div class="form-grid"><div class="field"><label for="profilePhone">Mobile number</label><input id="profilePhone" value="082 445 1290" required></div><div class="field"><label for="profileEmail">Email address</label><input id="profileEmail" type="email" value="thandiwe.nkosi@email.com" required></div></div>
+          <div class="field"><label for="profileAddress">Residential address</label><textarea id="profileAddress" required>14 Jasmine Ave, Parkhurst, Johannesburg, 2193</textarea></div>
+          <div class="form-grid"><div class="field"><label for="profileMarital">Marital status</label><select id="profileMarital"><option>Married</option><option>Single</option><option>Divorced</option><option>Widowed</option></select></div><div class="field"><label for="profileDependants">Dependants</label><input id="profileDependants" type="number" min="0" value="2"></div></div>
+          <button class="btn primary" type="submit">Save details</button>
+        </form>
+        <p id="profileSaved" class="data-muted" style="margin:12px 0 0;display:none;">Details saved and your adviser has been notified.</p>
+      </div>
+      <div class="client-data-panel"><h3>Documents on file</h3><div class="data-row"><span>ID copy</span><span class="request-status">On file</span></div><div class="data-row"><span>Proof of address</span><span class="request-status">On file</span></div></div>
+    </div>
+
+    <div id="cd-notifications" class="cd-panel">
+      <a class="back-link" onclick="showClientView('home')">← Back</a><h2 class="dash-greet">Notifications</h2>
+      <div class="client-data-panel"><h3>Recent updates</h3><ul class="notice-list"><li><strong>Claim update</strong><br><span class="data-muted">Santam authorised repairs. Choose a drop-off date.</span></li><li><strong>Reminder coming up</strong><br><span class="data-muted">Retirement fund fee renewal is due 1 Oct 2026.</span></li><li><strong>Annual review</strong><br><span class="data-muted">Your adviser review is booked for 14 Oct 2026.</span></li></ul></div>
+      <div class="client-data-panel"><h3>Notification preferences</h3><div class="data-row"><span>Email summaries</span><label><input type="checkbox" checked onchange="toggleNoticePreference(this)"> Enabled</label></div><div class="data-row"><span>SMS alerts</span><label><input type="checkbox" checked onchange="toggleNoticePreference(this)"> Enabled</label></div></div>
+    </div>
+
+    <div id="cd-settings" class="cd-panel">
+      <a class="back-link" onclick="showClientView('home')">← Back</a><h2 class="dash-greet">Settings</h2>
+      <div class="client-data-panel"><h3>Appearance &amp; accessibility</h3><div class="data-row"><span>Use a darker display</span><label><input type="checkbox" onchange="toggleClientTheme(this)"> Dark mode</label></div><div class="data-row"><span>Text size</span><select onchange="setClientTextSize(this.value)" style="padding:5px;border:1px solid #cbd8cf;"><option value="1">Default</option><option value="1.1">Large</option><option value="1.2">Extra large</option></select></div><div class="data-row"><span>Interface language</span><select onchange="setClientLanguage(this.value)" style="padding:5px;border:1px solid #cbd8cf;"><option value="English">English</option><option value="Afrikaans">Afrikaans</option><option value="isiZulu">isiZulu</option><option value="isiXhosa">isiXhosa</option><option value="Sesotho">Sesotho</option></select></div></div>
+      <div class="client-data-panel"><h3>Privacy &amp; security</h3><div class="data-row"><span>Two-factor authentication</span><span class="request-status">Recommended</span></div><p class="data-muted" style="margin:12px 0 0;line-height:1.6;">Your information is shared only with providers relevant to your policies and is handled under POPIA.</p></div>
+    </div>
+
+    <div id="cd-integrations" class="cd-panel">
+      <a class="back-link" onclick="showClientView('home')">← Back</a><h2 class="dash-greet">Connected providers</h2>
+      <p class="client-workspace-note">Your policies and investments are gathered here from the providers linked to your Royal Square relationship.</p>
+      <div class="client-data-panel"><div class="integration-grid"><div class="integration-item"><strong>Sanlam</strong><span>Connected via API · Life cover</span></div><div class="integration-item"><strong>Discovery</strong><span>Connected via API · Health insurance</span></div><div class="integration-item"><strong>Old Mutual</strong><span>Connected via API · Retirement annuity</span></div><div class="integration-item"><strong>Santam</strong><span>Connected via API · Home and motor</span></div><div class="integration-item"><strong>Allan Gray</strong><span>Nightly file transfer · Unit trust</span></div><div class="integration-item"><strong>Momentum</strong><span>Nightly file transfer · Retirement</span></div></div></div>
     </div>
 
     <div id="cd-money" class="cd-panel">
@@ -697,6 +798,11 @@
         </ul>
       </div>
     </div>
+    <section class="staff-workspace" aria-labelledby="staffClientsHeading">
+      <h3 id="staffClientsHeading" style="font:500 22px Georgia,serif;color:#1b3528;margin:30px 0 0;">Client workspace</h3>
+      <div class="staff-toolbar"><input id="staffClientSearch" type="search" placeholder="Search clients, goals or claims" oninput="filterStaffClients(this.value)"><button onclick="openStaffClient('M. Radebe')">Open selected client</button><button onclick="exportStaffClients()">Export client list</button></div>
+      <div class="staff-client-list" id="staffClientList"></div>
+    </section>
   </div>
 </div>
 
@@ -723,12 +829,23 @@
   function submitOnboarding(event){
     event.preventDefault();
     const name = document.getElementById('clientName').value.trim();
+    const email = document.getElementById('clientEmail').value.trim().toLowerCase();
+    const password = document.getElementById('clientPassword').value;
+    const accounts = JSON.parse(localStorage.getItem('royalSquareAccounts') || '[]');
+    if(accounts.some(account => account.email === email)){
+      document.getElementById('onboardingSuccess').textContent = 'An account with this email already exists. Please log in instead.';
+      document.getElementById('onboardingSuccess').classList.add('show');
+      return;
+    }
+    accounts.push({email, password, name, clientId:'c1', createdAt:new Date().toISOString()});
+    localStorage.setItem('royalSquareAccounts', JSON.stringify(accounts));
     const services = Array.from(document.querySelectorAll('input[name="service"]:checked')).map(input => input.value);
     const success = document.getElementById('onboardingSuccess');
     success.textContent = services.length
       ? `Thanks, ${name}. Your profile is ready and your interests in ${services.join(', ')} have been sent to Royal Square.`
       : `Thanks, ${name}. Your client profile is ready. A Royal Square person will contact you to understand what you need.`;
     success.classList.add('show');
+    setTimeout(()=>{ document.getElementById('loginEmail').value=email; document.getElementById('loginPassword').value=password; openModal('login'); }, 500);
   }
 
   function saveStaffName(event){
@@ -755,32 +872,86 @@
     document.getElementById('overlay').classList.remove('show');
   }
 
+  let activeLoginEmail = '';
+  let securityStream = null;
+  function registeredAccounts(){
+    try{return JSON.parse(localStorage.getItem('royalSquareAccounts') || '[]');}
+    catch(e){return [];}
+  }
   function enterDashboard(){
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const password = document.getElementById('loginPassword').value;
+    if(selectedRole==='customer'){
+      const account = registeredAccounts().find(item=>item.email===email && item.password===password);
+      if(!account){ toast('Email or password is incorrect. Please sign up first.'); return; }
+      activeLoginEmail = email;
+    }
     closeModal();
     document.getElementById('scene').style.display = 'none';
     document.getElementById('dashboardRoot').classList.add('show');
     const isStaff = selectedRole === 'staff';
+    document.getElementById('dashboardRoot').classList.toggle('client-platform-host', !isStaff);
     document.getElementById('dashboardRoot').classList.toggle('client-mode', !isStaff);
     document.getElementById('customerDash').style.display = isStaff ? 'none' : 'block';
     document.getElementById('staffDash').style.display = isStaff ? 'block' : 'none';
     document.getElementById('whoLine').textContent = isStaff ? 'Royal Square Personnel portal' : 'Client portal';
+    if (!isStaff){
+      document.getElementById('embeddedClientPlatform').src = 'client-platform.html?role=client';
+      setTimeout(()=>document.getElementById('securityOverlay').classList.add('show'), 450);
+    }
     if (isStaff && staffName) {
       document.getElementById('staffName').value = staffName;
       document.getElementById('staffIdentity').textContent = `Advisory requests assigned to ${staffName}.`;
       document.getElementById('advisoryOwner').textContent = staffName;
     }
+    if (isStaff) renderStaffClients();
     if (!isStaff) showClientView('home');
+  }
+
+  function stopSecurityCamera(){
+    if(securityStream){securityStream.getTracks().forEach(track=>track.stop()); securityStream=null;}
+    const video=document.getElementById('securityVideo');
+    video.srcObject=null; video.style.display='none';
+  }
+  function recordLoginSecurity(locationText, cameraStatus){
+    const event={email:activeLoginEmail, createdAt:new Date().toISOString(), location:locationText, camera:cameraStatus, notification:'Prototype email notification recorded'};
+    const events=JSON.parse(localStorage.getItem('royalSquareLoginEvents') || '[]');
+    events.unshift(event); localStorage.setItem('royalSquareLoginEvents', JSON.stringify(events));
+    document.getElementById('securityStatus').textContent = `Login recorded at ${new Date(event.createdAt).toLocaleString('en-ZA')}. ${locationText}. Personnel notification recorded.`;
+  }
+  function finishSecurityCheck(locationText, cameraStatus){
+    recordLoginSecurity(locationText, cameraStatus); stopSecurityCamera();
+    setTimeout(()=>document.getElementById('securityOverlay').classList.remove('show'), 900);
+  }
+  async function startSecurityCheck(){
+    const status=document.getElementById('securityStatus');
+    let cameraStatus='Camera not allowed';
+    try{
+      securityStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
+      const video=document.getElementById('securityVideo'); video.srcObject=securityStream; video.style.display='block'; cameraStatus='Camera permission granted (face-check demo)';
+    }catch(error){ status.textContent='Camera permission was not granted. Location can still be recorded.'; }
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(position=>finishSecurityCheck(`Location ${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)}`,cameraStatus),()=>finishSecurityCheck('Location unavailable',cameraStatus),{timeout:5000});
+    }else finishSecurityCheck('Location unavailable',cameraStatus);
+  }
+  function skipSecurityCheck(){
+    finishSecurityCheck('Location not shared', 'Camera check skipped');
+    document.getElementById('securityOverlay').classList.remove('show');
   }
   function exitDashboard(){
     document.getElementById('dashboardRoot').classList.remove('show');
     document.getElementById('dashboardRoot').classList.remove('client-mode');
+    document.getElementById('dashboardRoot').classList.remove('client-platform-host');
+    document.getElementById('embeddedClientPlatform').src = 'about:blank';
     document.getElementById('onboardingRoot').classList.remove('show');
     document.getElementById('scene').style.display = 'block';
+    document.getElementById('overlay').classList.remove('show');
+    window.scrollTo(0,0);
     showClientView('home');
   }
 
   // ---- Client-side life-based navigation ----
-  const CLIENT_PANELS = ['home','money','insurance','investments','property','family','documents','adviser','help','goals','reminders','claims','requests',
+  const CLIENT_PANELS = ['home','money','insurance','investments','property','family','documents','adviser','help','goals','reminders','claims','requests','personal','notifications','settings','integrations',
     'accident-safety','accident-emergency','accident-capture','accident-building','accident-review','accident-done'];
 
   function hideAllClientPanels(){
@@ -794,6 +965,82 @@
     hideAllClientPanels();
     document.getElementById('cd-' + view).style.display = 'block';
     document.getElementById('comingSoonNote').style.display = 'none';
+  }
+
+  function saveClientDetails(event){
+    event.preventDefault();
+    const saved = document.getElementById('profileSaved');
+    saved.style.display = 'block';
+    setTimeout(() => { saved.style.display = 'none'; }, 2600);
+  }
+
+  function toggleNoticePreference(input){
+    input.parentElement.lastChild.textContent = input.checked ? ' Enabled' : ' Disabled';
+  }
+
+  function toggleClientTheme(input){
+    document.getElementById('dashboardRoot').style.filter = input.checked ? 'invert(.92) hue-rotate(180deg)' : '';
+  }
+
+  function setClientTextSize(value){
+    document.getElementById('dashboardRoot').style.fontSize = value + 'em';
+  }
+
+  function setClientLanguage(language){
+    document.documentElement.lang = language === 'English' ? 'en' : 'en-ZA';
+    document.querySelector('#cd-settings .client-workspace-note').textContent = `Interface language set to ${language}. Core navigation is ready for localisation.`;
+  }
+
+  function searchDashboard(query){
+    const q = query.trim().toLowerCase();
+    if (!q) return;
+    const destinations = [
+      ['goal','goals'],['retirement','goals'],['reminder','reminders'],['renewal','reminders'],
+      ['claim','claims'],['accident','help'],['request','requests'],['policy','insurance'],
+      ['investment','investments'],['property','property'],['family','family'],['document','documents'],
+      ['adviser','adviser'],['contact','personal']
+    ];
+    const match = destinations.find(([term]) => q.includes(term));
+    if (match) showClientView(match[1]);
+  }
+
+  function exportClientSummary(){
+    const summary = ['Royal Square Financial client summary','Net worth: R 4,218,400','Active policies: 6','Open claims: 1','Goals tracked: 3'].join('\n');
+    const blob = new Blob([summary], {type:'text/plain'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob); link.download = 'royal-square-client-summary.txt'; link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  const staffClients = [
+    {name:'M. Radebe', email:'m.radebe@email.com', status:'Open claim · Santam', netWorth:'R 4,218,400', completeness:'92%'},
+    {name:'T. Dlamini', email:'t.dlamini@email.com', status:'Fee renewal due', netWorth:'R 2,840,100', completeness:'78%'},
+    {name:'A. Molefe', email:'a.molefe@email.com', status:'New advisory request', netWorth:'R 1,240,000', completeness:'61%'},
+    {name:'B. Mokoena', email:'b.mokoena@email.com', status:'New lead', netWorth:'Not assessed', completeness:'18%'},
+    {name:'S. Khumalo', email:'s.khumalo@email.com', status:'All up to date', netWorth:'R 6,120,500', completeness:'96%'},
+    {name:'N. Dlamini', email:'n.dlamini@email.com', status:'Review booked', netWorth:'R 980,200', completeness:'84%'}
+  ];
+
+  function renderStaffClients(filter=''){
+    const q = filter.toLowerCase();
+    const list = staffClients.filter(client => Object.values(client).join(' ').toLowerCase().includes(q));
+    document.getElementById('staffClientList').innerHTML = list.map(client => `<button class="staff-client-card" onclick="openStaffClient('${client.name}')"><strong>${client.name}</strong><span>${client.email}</span><span>${client.status}</span><span>Profile completeness ${client.completeness} · ${client.netWorth}</span></button>`).join('') || '<p class="staff-intro">No clients match that search.</p>';
+  }
+
+  function filterStaffClients(value){ renderStaffClients(value); }
+
+  function openStaffClient(name){
+    const client = staffClients.find(item => item.name === name) || staffClients[0];
+    document.getElementById('modal').innerHTML = `<button class="close-x" onclick="closeModal()">✕</button><h2>Client overview</h2><p class="sub">${client.name} · ${client.email}</p><div class="claim-summary"><div><span>Profile completeness</span><span>${client.completeness}</span></div><div><span>Net worth</span><span>${client.netWorth}</span></div><div><span>Current attention</span><span>${client.status}</span></div></div><button class="btn primary" style="width:100%;margin-top:18px;" onclick="closeModal(); toast('Opening ${client.name} client record.');">Open client record</button>`;
+    document.getElementById('overlay').classList.add('show');
+  }
+
+  function exportStaffClients(){
+    const csv = ['Client,Email,Status,Net worth,Completeness', ...staffClients.map(client => [client.name,client.email,client.status,client.netWorth,client.completeness].join(','))].join('\n');
+    const blob = new Blob([csv], {type:'text/csv'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob); link.download = 'royal-square-client-list.csv'; link.click();
+    URL.revokeObjectURL(link.href);
   }
 
   function showComingSoon(label){
