@@ -135,7 +135,7 @@
   #dashboardRoot.show{ display:block; }
   #dashboardRoot.client-platform-host{ display:block !important; min-height:100vh; width:100%; }
   #dashboardRoot.client-platform-host > :not(#embeddedClientPlatform){ display:none !important; }
-  #embeddedClientPlatform{ display:none; width:100%; height:100vh; min-height:720px; border:0; background:#eef1ec; }
+  #embeddedClientPlatform{ display:none; width:100%; height:100dvh; min-height:100svh; border:0; background:#eef1ec; }
   #dashboardRoot.client-platform-host #embeddedClientPlatform{ display:block; }
   .top-bar{
     background:var(--ink); color:var(--paper); padding:14px 28px;
@@ -361,6 +361,12 @@
     .form-grid,.service-options{ grid-template-columns:1fr; }
     .staff-name-form{ display:block; }
     .staff-name-form .btn{ margin-top:10px; }
+    #embeddedClientPlatform{ height:100dvh; min-height:100svh; }
+    .landing-nav{ gap:16px; }
+    .logo-wordmark .name{ letter-spacing:2px; }
+    .logo-wordmark .name span{ letter-spacing:2px; }
+    .nav-meta{ flex:1; justify-content:flex-end; }
+    .nav-meta .nav-login{ white-space:nowrap; }
   }
 </style>
 </head>
